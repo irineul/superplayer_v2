@@ -1,0 +1,83 @@
+@using System.Web.Optimization
+@using BootstrapSupport
+@using NavigationRoutes
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>@ViewBag.Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        @Scripts.Render("~/js")
+        @Styles.Render("~/Content/css")
+        @RenderSection("head", required: false)
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="masthead">
+                        <ul class="nav nav-pills pull-right">
+                            <li class="active" id="homeLink" ><a href="@Href("~/Home")">Home</a></li>
+                            <li id="challengeLink"><a href="@Href("~/Challenge")">Solucionar Caso</a></li>
+                            <li id="generateFilesLink" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gerar Arquivos<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Href("~/GenerateFiles/Scenario")">Cenário</a></li>
+                                    <li><a href="@Href("~/GenerateFiles/Witness")">Testemunha</a></li>
+                                    <li><a href="@Href("~/GenerateFiles/About")">Instruções</a></li>
+                                </ul>
+                            </li>
+                            <li id="instructionsLink"><a href="@Href("~/Instructions")">O Desafio</a></li>
+                            <li id="aboutLink"><a href="@Href("~/About")">Sobre mim</a></li>
+                        </ul>
+                        <h3 class="muted">
+                            SuperPlayer - O Desafio</h3>
+                    </div>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            @Html.Navigation()
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="container">
+            @Html.Partial("_alerts")
+            @Html.Partial("_validationSummary")
+            @RenderBody()   
+            
+            <div class="navbar navbar-fixed-bottom">
+                <div style="text-align: center;">
+                    Irineu Licks Filho - irineu.licks@gmail.com - (51) 85.491.491
+                </div>
+            </div> 
+        </div>
+         @RenderSection("Scripts", required: false)
+    </body>
+    <script>
+        /*menu handler*/
+        $(function () {
+            function stripTrailingSlash(str) {
+                if (str.substr(-1) == '/') {
+                    return str.substr(0, str.length - 1);
+                }
+                return str;
+            }
+
+            var url = window.location.pathname;
+            var activePage = stripTrailingSlash(url);
+
+            $('.nav li a').each(function () {
+                var currentPage = stripTrailingSlash($(this).attr('href'));
+
+                if (activePage == currentPage) {
+                    $(this).parent().addClass('active');
+                }
+                else {
+                    $(this).parent().removeClass('active');
+                }
+            });
+        });    
+    </script>
+</html>
+

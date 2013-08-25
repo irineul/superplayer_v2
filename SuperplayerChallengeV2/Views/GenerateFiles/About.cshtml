@@ -1,0 +1,27 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "O Desafio - Gerar Arquivos Instruções";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+<html>
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />
+<div class="container">
+
+      <h1 style="text-align:center;">Geração de arquivos</h1>
+      <hr />
+      <p>Para solucionar o caso, deve ser carregado os arquivos de Cenário, que consiste em todos os suspeitos, locais e armas possívels e o arquivo de Testemunhas, que indica os culpados. Ambos arquivos no formato JSON.</p>
+      <p>Para gerar os arquivos necessários, deve-se acessar o item "Gerar Arquivos" do menu, selecionando qual tipo de arquivo deverá ser criado.</p>
+      <br />
+      <span class="label label-success">Cenário:</span>
+      <p>   Deve ser informado o tipo de dado (suspeito ou local ou arma) e o nome do item. Então, após clicar no botão adicionar, ele é adicionado à lista de Cenário, a qual será gerado no arquivo</p>
+      <br />
+      <span class="label label-success">Testemunhas:</span>
+      <p>   Deve ser informado o suspeito, local e arma do culpado pelo crime. Então, após clicar no botão adicionar, o criminoso será adicionado na lista de Testemunhas. </p>
+      <br />
+      <p>Após informar os dados, o botão "Gerar Arquivo" deve ser clicado para iniciar o processo. O arquivo JSON gerado será salvo na pasta "C:\TEMP", portanto, a mesma deve estar criada</p>
+    </div> <!-- /container -->
+</html>

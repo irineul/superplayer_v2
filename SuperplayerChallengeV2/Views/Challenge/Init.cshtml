@@ -1,0 +1,70 @@
+﻿@using BootstrapSupport
+@model Models.ScenarioModel
+@{
+    ViewBag.Title = "O Desafio - Solucionar Caso";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />
+@if (TempData.ContainsKey(Alerts.ERROR))
+{
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $("#btnFindTheKiller").attr('disabled', 'disabled');
+        });
+    </script>
+}
+@using (Html.BeginForm("Finish", "Challenge", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <body>
+        <br />
+        <div class="container-narrow">
+            <strong>Suspeitos</strong>
+                <table class="table table-hover">
+                    @if (Model.Suspects != null && Model.Suspects.Count > 0)
+                    {
+                      foreach (var item in @Model.Suspects)
+                      {
+                        <tr>
+                          <td>@item.Name</td>
+                       </tr>
+                      }
+                    }
+                </table>
+
+            <strong> Locals </strong>
+                <table class="table table-hover">
+                    @if (Model.Locals != null && Model.Locals.Count > 0)
+                    {
+                      foreach (var item in @Model.Locals)
+                      {
+                        <tr>
+                          <td>@item.Name</td>
+                       </tr>
+                      }
+                    }
+                </table>
+
+            <strong> Guns </strong>
+                <table class="table table-hover">
+                    @if (Model.Guns != null && Model.Guns.Count > 0)
+                    {
+                      foreach (var item in @Model.Guns)
+                      {
+                        <tr>
+                          <td>@item.Name</td>
+                       </tr>
+                      }
+                    }
+                </table>
+           <button id="btnFindTheKiller" class="btn btn-medium btn-success" type="submit">
+                    Descobrir assassino</button>    
+        </div>
+    </body>
+}
+</html>

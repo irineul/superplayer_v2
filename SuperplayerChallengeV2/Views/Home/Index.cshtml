@@ -1,0 +1,38 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Superplayer - O Desafio";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+<html>
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />
+
+       <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>O Desafio</h1>
+        <p>O empresário Bill G. Ates foi assassinado e o corpo dele foi deixado na frente da delegacia de polícia. O detetive Lin Ust Orvalds foi escolhido para investigar este caso. Após uma série de investigações, ele organizou uma lista com prováveis assassinos, os locais do crime e quais armas poderiam ter sido utilizadas.</p>
+        <p><a class="btn btn-primary btn-large" href="@Href("~/Challenge")">Solucionar o caso</a></p>
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <h2>Sobre o desafio</h2>
+          <p>Leia as instruções do desafio e descubra mais detalhes sobre o terrível assassinato do empresário</p>
+          <p><a class="btn" href="@Href("~/Instructions")">Mais detalhes</a></p>
+        </div>
+        <div class="span4">
+          <h2>Gere os arquivos</h2>
+          <p>Você não tem os arquivos para solucionar o caso? Está sem paciência para escrever o JSON?</p>
+          <p><a class="btn" href="@Href("~/GenerateFiles/About")">Mais detalhes</a></p>
+       </div>
+        <div class="span4">
+          <h2>Sobre mim</h2>
+          <p>Tenha acesso a mais informações sobre o Irineu, o candidato para participar da equipe do Superplayer</p>
+          <p><a class="btn" href="@Href("~/About")">Mais detalhes</a></p>
+        </div>
+      </div>
+</html>

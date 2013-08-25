@@ -1,0 +1,70 @@
+﻿@using BootstrapSupport
+@model Models.TheEndModel
+@{
+    ViewBag.Title = "O Desafio - Solucionar Caso";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />
+
+    @Html.ValidationSummary(true)
+    <body>
+        <div class="container-narrow">
+            <h4 style="text-align: center;">Tentativas</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Suspeito</th>
+                            <th>Local</th>
+                            <th>Arma</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.Detective != null && Model.Detective.Guesses != null && Model.Detective.Guesses.Count > 0)
+                    {
+                        foreach (var item in @Model.Detective.Guesses)
+                         {
+                            <tr>
+                              <td>@item.Suspect.Name</td>
+                              <td>@item.Gun.Name</td>
+                              <td>@item.Local.Name</td>
+                           </tr>
+                          }
+                    }
+                    </tbody>
+                </table>    
+
+                <br />
+
+            <h4 style="text-align: center;">Assassinos</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Suspeito</th>
+                            <th>Local</th>
+                            <th>Arma</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.Killers != null && Model.Killers.Count > 0)
+                    {
+                        foreach (var item in @Model.Killers)
+                         {
+                            <tr>
+                              <td>@item.Suspect.Name</td>
+                              <td>@item.Gun.Name</td>
+                              <td>@item.Local.Name</td>
+                           </tr>
+                          }
+                    }
+                    </tbody>
+                </table>            
+        </div>
+        <!-- /container -->
+    </body>
+</html>

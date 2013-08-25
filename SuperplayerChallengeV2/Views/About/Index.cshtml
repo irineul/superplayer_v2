@@ -1,0 +1,43 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "O Desafio - Sobre mim";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+<html>
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />
+<div class="container marketing">
+    <br />
+
+      <div class="hero-unit">
+        <h1>Irineu Licks Filho</h1>
+        <p>Estou à procura de projetos desafiadores que me agreguem profissionalmente. Sou apaixonado pelo mundo das startups e acompanho o Superplayer desde sua versão Beta!</p>
+        <script type="IN/MemberProfile" data-id="http://br.linkedin.com/in/irineulicks" data-format="hover" data-related="false"></script>
+      </div>
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="span4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="140x140" style="width: 140px; height: 140px;" src="@Href("~/Content/img/code.jpg")">
+          <h2>Programação</h2>
+          <p>Estou sempre em busca de novos conhecimentos, aprendendo novas linguagens e tecnologias. Acho muito importante o profissional de TI estar sempre atualizado. Ainda tenho muito o que aprender em programação e UX, mas também posso colaborar com minhas experiências e boas ideias.</p>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="140x140" style="width: 140px; height: 140px;" src="@Href("~/Content/img/cube.png")">
+          <h2>Desafios</h2>
+          <p>Sou movido a desafios! Sou inquieto, curioso e busco constante aprendizado. Quero trabalhar em uma empresa que está em processo de crescimento e que possibilite o desenvolvimento de seus colaboradores, pois pretendo crescer junto com ela.</p>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="140x140" style="width: 140px; height: 140px;" src="@Href("~/Content/img/beer.jpg")">
+          <h2>Cervejas</h2>
+          <p>Além dos desafios e programação, a cerveja é outra paixão! Sou amante da cultura cervejeira, gosto de aprender mais sobre os tipos de cerveja, suas origens e o processo de produção. E, claro, uma boa cerveja fica ainda melhor na companhia da namorada e de bons amigos!</p>
+        </div><!-- /.span4 -->
+      </div><!-- /.row -->
+
+    </div>
+</html>
+
+<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>

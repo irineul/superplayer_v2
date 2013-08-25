@@ -1,0 +1,32 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "O Desafio - Sobre";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+<html>
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />
+
+<div class="container">
+
+      <h1>O Desafio: Descubra o Assassino</h1>
+      <p>O empresário Bill G. Ates foi assassinado e o corpo dele foi deixado na frente da delegacia de polícia. O detetive Lin Ust Orvalds foi escolhido para investigar este caso.</p>
+      <br />
+      <p> Após uma série de investigações, ele organizou uma lista com prováveis assassinos, os locais do crime e quais armas poderiam ter sido utilizadas. Uma testemunha foi encontrada, mas ela só consegue responder se o detetive Lin Ust Orvalds fornecer uma teoria. Para cada teoria, o detetive "chuta" um assassino, um local e uma arma. A testemunha, então, responde com um número. Se a teoria estiver correta (assassino, local e arma corretos), ela responde 0. Se a teoria está errada, um valor 1, 2 ou 3 é retornado. O valor 1 indica que o assassino(a) está incorreto; 2 indica que o local está incorreto; 3 indica que a arma está incorreta. Se mais de uma suposição está incorreta, a testemunha retorna qualquer um dos valores incorretos (veja o exemplo). </p>
+      <br />
+      <p>Por exemplo, se o assassino for Donald Duck Knuth (veja o arquivo anexo) usando um trezoitão em Tokio: </p>
+      <br />
+      <p>Teoria: 1, 1, 1</p>
+      <p>Retorno: 1, ou 2, ou 3 (todos estão incorretos) </p>
+      <p>Teoria: 3, 1, 3 </p>
+      <p>Retorno: 1, ou 3 (somente o local está correto) </p>
+      <p>Teoria: 5, 3, 4 </p>
+      <p>Retorno: 1 (somente o assassino está incorreto) </p>
+      <p>Teoria: 2, 3, 4 </p>
+      <p>Retorno: 0 (todos corretos, você solucionou o caso) </p>
+
+    </div> <!-- /container -->
+</html>

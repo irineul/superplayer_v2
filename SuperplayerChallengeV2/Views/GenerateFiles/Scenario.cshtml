@@ -1,0 +1,156 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "O Desafio - Gerar Arquivo de Cenário";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+<html>
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />
+@using (Html.BeginForm("GenerateScenarioJsonFile", "GenerateFiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        <div style="height: 30px;">
+            <div id="successAdd" class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                Item adicionado com sucesso!
+            </div>
+            <div id="successDel" class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                Item excluído com sucesso!
+            </div>    
+            <div id="errorAdd" class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                Nome do item deve ser informado.
+            </div>
+        </div>    
+    
+        <br />
+          <input type="text" class="input-xlarge" id="txtItem" placeholder="Digite o nome...">
+          <div id="rbOptionData">
+          <div class="control-group">
+            <label class="radio">
+              <input type="radio" name="optionData" id="optionSuspect" value="S" checked>
+              Suspeito
+            </label>
+            <label class="radio">
+              <input type="radio" name="optionData" id="optionLocal" value="L">
+              Local
+            </label>
+            <label class="radio">
+              <input type="radio" name="optionData" id="optionGun" value="G">
+              Arma
+            </label>
+            </div>  
+            </div>  
+            <div class="clear"> </div>
+          <button onclick="AddScenarioItem(); return false;" class="btn">Adicionar</button>
+        <div class="clear"> </div>
+        <br />
+            <div id="gridSuspectsLabel"> 
+                <strong>Suspeitos</strong>
+            </div>
+            <div id="gridSuspects">    
+            </div>
+
+            <div id="gridLocalsLabel"> 
+                <strong>Locais</strong>
+            </div>
+            <div id="gridLocals">    
+            </div>
+
+            <div id="gridGunsLabel"> 
+                <strong>Armas</strong>
+            </div>
+            <div id="gridGuns">    
+            </div>
+            <button type="submit" id="btnGenerateFile" class="btn btn-large btn-primary" disabled="disabled">Gerar arquivo</button>
+
+}
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $("#gridSuspectsLabel").hide();
+            $("#gridLocalsLabel").hide();
+            $("#gridGunsLabel").hide();
+            $("#successAdd").hide();
+            $("#successDel").hide();
+            $("#errorAdd").hide();
+        });
+
+        function DeleteScenarioItem(idItem, dataType) {
+            $.ajax({
+                type: "POST",
+                url: '../GenerateFiles/DeleteScenarioItem/',
+                data: { idItem: idItem, dataType: dataType }
+            }).done(function (data) {
+                if (data != "") {
+                    if (dataType == "S") {
+                        $("#gridSuspects").html("");
+                        $("#gridSuspects").html(data);
+                    }
+                    else if (dataType == "L") {
+                        $("#gridLocals").html("");
+                        $("#gridLocals").html(data);
+                    }
+                    else if (dataType == "G") {
+                        $("#gridGuns").html("");
+                        $("#gridGuns").html(data);
+                    }
+
+                    if ($("#gridSuspects").html().indexOf("href") == -1 || $("#gridLocals").html().indexOf("href") == -1 || $("#gridGuns").html().indexOf("href") == -1) {
+                        $("#btnGenerateFile").attr("disabled", true);
+                    }
+                    else {
+                        $("#btnGenerateFile").attr("disabled", false);
+                    }
+                    $('#successDel').fadeIn(500).delay(300).fadeOut(500);
+                }
+
+
+            });
+        }
+
+        function AddScenarioItem() {
+            var item = $("#txtItem").val();
+            var dataType = $('#rbOptionData input:radio:checked').val();
+            if (item != "") {
+                $.ajax({
+                    url: '../GenerateFiles/AddScenarioItem/',
+                    data: { item: item, dataType: dataType },
+                    type: 'POST',
+                    success: function (data) {
+                        if (data != "") {
+                            if (dataType == "S") {
+                                $("#gridSuspectsLabel").show();
+                                $("#gridSuspects").html();
+                                $("#gridSuspects").html(data);
+                            }
+                            else if (dataType == "L") {
+                                $("#gridLocalsLabel").show();
+                                $("#gridLocals").html();
+                                $("#gridLocals").html(data);
+                            }
+                            else if (dataType == "G") {
+                                $("#gridGunsLabel").show();
+                                $("#gridGuns").html();
+                                $("#gridGuns").html(data);
+                            }
+                            $("#txtItem").val("");
+                            $('#successAdd').fadeIn(500).delay(300).fadeOut(500);
+                            if ($("#gridSuspects").html().indexOf("href") != -1 && $("#gridLocals").html().indexOf("href") != -1 && $("#gridGuns").html().indexOf("href") != -1) {
+                                $("#btnGenerateFile").attr("disabled", false);
+                            } else {
+                                $("#btnGenerateFile").attr("disabled", true);
+                            }
+                        }
+                    }
+                });
+            }
+            else 
+            {
+                $('#errorAdd').fadeIn(500).delay(500).fadeOut(500);
+            }
+        }
+    </script>
+</html>

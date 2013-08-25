@@ -1,0 +1,127 @@
+﻿@using BootstrapSupport
+@model dynamic
+
+@{
+    ViewBag.Title = "O Desafio - Gerar Arquivo de Cenário";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+<html>
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />  
+@if (TempData.ContainsKey(Alerts.SUCCESS))
+{
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $("#divMsgs").hide();
+        });
+    </script>
+}
+@using (Html.BeginForm("GenerateWitnessJsonFile", "GenerateFiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        
+    <div id="divMsgs" style="height: 30px;">
+        <div id="successAdd" class="alert alert-success" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            Suspeito adicionado com sucesso!
+        </div>
+        <div id="successDel" class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            Suspeito excluído com sucesso!
+        </div>     
+        <div id="errorAdd" class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            Suspeito, Local e Arma devem ser informados.
+        </div>           
+    </div>
+    
+        <br />
+          <input type="text" class="input-xlarge" id="txtSuspect" placeholder="Suspeito">
+          <div class="clear"> </div>
+          <input type="text" class="input-xlarge" id="txtLocal" placeholder="Local">
+          <div class="clear"> </div>      
+          <input type="text" class="input-xlarge" id="txtGun" placeholder="Arma">
+          <div class="clear"> </div>
+            <div class="clear"> </div>
+          <button onclick="AddWitnessItem(); return false;" class="btn">Adicionar</button>
+        <div class="clear"> </div>
+        <br />
+        
+            <div id="gridWitnessLabel"> 
+                <strong>Suspeitos</strong>
+            </div>
+            <div id="gridWitness">    
+            </div>
+
+            <button type="submit" id="btnGenerateFile" class="btn btn-large btn-primary" disabled="disabled">Gerar arquivo</button>
+
+}
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $("#gridWitnessLabel").hide();
+            $("#successAdd").hide();
+            $("#successDel").hide();
+            $("#errorAdd").hide();
+        });
+
+        function DeleteWitnessItem(idItem, dataType) {
+            $.ajax({
+                type: "POST",
+                url: '../GenerateFiles/DeleteWitnessItem/',
+                data: { idItem: idItem, dataType: dataType }
+            }).done(function (data) {
+                if (data != "") {
+                    $("#gridWitness").html("");
+                    $("#gridWitness").html(data);
+
+                    if ($("#gridWitness").html().indexOf("href") == -1) {
+                        $("#btnGenerateFile").attr("disabled", true);
+                    }
+                    else {
+                        $("#btnGenerateFile").attr("disabled", false);
+                    }
+                    $('#successDel').fadeIn(500).delay(300).fadeOut(500);
+                }
+
+
+            });
+        }
+
+        function AddWitnessItem() {
+            var suspect = $("#txtSuspect").val();
+            var local = $("#txtLocal").val();
+            var gun = $("#txtGun").val();
+            if (suspect != "" && local != "" && gun != "") {
+                $.ajax({
+                    url: '../GenerateFiles/AddWitnessItem/',
+                    data: { suspect: suspect, local: local, gun: gun },
+                    type: 'POST',
+                    success: function (data) {
+                        if (data != "") {
+                            $("#gridWitnessLabel").show();
+                            $("#gridWitness").html();
+                            $("#gridWitness").html(data);
+                            $("#txtSuspect").val("");
+                            $("#txtLocal").val("");
+                            $("#txtGun").val("");
+
+                            if ($("#gridWitness").html().indexOf("href") != -1) {
+                                $("#btnGenerateFile").attr("disabled", false);
+                            }
+                            else {
+                                $("#btnGenerateFile").attr("disabled", true);
+                            }
+
+                            $('#successAdd').fadeIn(500).delay(300).fadeOut(500);
+                        }
+                    }
+                });
+            }
+            else 
+            {
+                $('#errorAdd').fadeIn(500).delay(500).fadeOut(500);
+            }
+        }
+    </script>
+</html>

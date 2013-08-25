@@ -1,0 +1,47 @@
+﻿@using BootstrapSupport
+@model Object
+@{
+    ViewBag.Title = "O Desafio - Solucionar Caso";
+    Layout = "~/Views/shared/_BootstrapLayout.basic.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap/bootstrap-theme.css"
+    media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-mvc-validation.css"
+    media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/body.css" media="screen" />
+@using (Html.BeginForm("Init", "Challenge", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="container-narrow">
+        <div class="row-fluid marketing">
+          <h1 style="text-align:center;">Geração de arquivos</h1>
+          <hr />
+            <p>
+                Faça o upload do arquivo de cenários</p>
+        </div>
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="input-append">
+    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Selecionar arquivo</span><span class="fileupload-exists">Alterar</span><input type="file" id="fileData" name="fileData"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remover</a>
+  </div>
+</div>
+        <div class="clear">
+        <br />
+        <p>
+            Faça o upload do arquivo de testemunha</p>
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="input-append">
+    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Selecionar arquivo</span><span class="fileupload-exists">Alterar</span><input type="file" id="fileWitness" name="fileWitness"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remover</a>
+  </div>
+</div>
+        <button id="btnSubmitFile" class="btn btn-medium btn-success" type="submit">
+            Submeter arquivos</button>
+    </div>
+    </div>
+    <!-- /container -->
+
+}
+</html>

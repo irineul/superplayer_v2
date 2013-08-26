@@ -134,7 +134,6 @@
     </Compile>
     <Compile Include="Models\TheEndModel.cs" />
     <Compile Include="Models\ScenarioModel.cs" />
-    <Compile Include="Models\HomeInputModel.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />
     <Compile Include="NavigationRoutes\NavigationExtensions.cs" />

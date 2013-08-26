@@ -85,12 +85,19 @@ namespace SuperplayerChallenge.Controllers
         {
             ScenarioModel scenario = this.TempData["Scenario"] != null ? (ScenarioModel) this.TempData["Scenario"] : null;
             List<Witness> witness = this.TempData["Witness"] != null ? (List<Witness>)this.TempData["Witness"] : null;
+            TheEndModel theEnd = new TheEndModel();
 
-
-            TheEndModel theEnd = ChallengeSolverBusiness.GetInstance().FindWhoIsTheKiller(scenario, witness);
-
+            try
+            {
+                theEnd = ChallengeSolverBusiness.GetInstance().FindWhoIsTheKiller(scenario, witness);
+            }
+            catch (Exception e)
+            {
+                Error("Assassino não encontrado!");
+                return View(theEnd);
+            }
             
-            if (theEnd == null || theEnd.Killers.Count == 0)
+            if (theEnd == null || theEnd.Killers == null || theEnd.Killers.Count == 0)
             {
                 Error("Assassino não encontrado!");
             }

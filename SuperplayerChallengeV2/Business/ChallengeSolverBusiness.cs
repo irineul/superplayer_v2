@@ -51,7 +51,7 @@ namespace Business
         private void FindTheKiller(int idxGun, int idxLocal, int idxSuspect, Witness witness, ScenarioModel scenario)
         {
             int response = witness.IsHim(idxSuspect, idxLocal, idxGun);
-            detective.Guesses.Add(new Killer() { Gun = scenario.Guns[idxGun], Local = scenario.Locals[idxLocal], Suspect = scenario.Suspects[idxLocal]});
+            detective.Guesses.Add(new Killer() { Gun = scenario.Guns[idxGun], Local = scenario.Locals[idxLocal], Suspect = scenario.Suspects[idxSuspect]});
             
             /* Wrong Suspect */
             if (response == 1)
@@ -117,19 +117,19 @@ namespace Business
             /* Create Suspects */
             for (int i = 0; i < scenario.Suspects.Length; i++)
             {
-                suspects.Add(new Suspect() { Id = i + 1, Name = scenario.Suspects[i] });
+                suspects.Add(new Suspect() { Id = i, Name = scenario.Suspects[i] });
             }
 
             /* Create Guns */
             for (int i = 0; i < scenario.Guns.Length; i++)
             {
-                guns.Add(new Gun() { Id = i + 1, Name = scenario.Guns[i] });
+                guns.Add(new Gun() { Id = i, Name = scenario.Guns[i] });
             }
 
             /* Create Locals */
             for (int i = 0; i < scenario.Locals.Length; i++)
             {
-                locals.Add(new Local() { Id = i + 1, Name = scenario.Locals[i] });
+                locals.Add(new Local() { Id = i, Name = scenario.Locals[i] });
             }
 
             return new ScenarioModel() { Guns = guns, Suspects = suspects, Locals = locals };
